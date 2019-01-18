@@ -12,8 +12,8 @@
             #choice-block{display:block;list-style:none;margin:0;padding:0;}
             #submitbutton{background:#5a6b8c;}
             #submitbutton:hover{background:#7b8da6;}
-            .simpleBtn{background:#C5F9EA;  font-size: 16px; white-space: nowrap; width: 100%; margin: 20px;}
-            .simpleBtn:active{background:#12FFBB;  font-size: 14px; white-space: nowrap; width: 100%; margin: 20px;}
+            .simpleBtn{background:#C5F9EA;  font-size: 14px; white-space: nowrap; margin: 5px;}
+            .simpleBtn:active{background:#12FFBB;  font-size: 12px; white-space: nowrap; margin: 5px;}
             #explanation{margin:0 auto;padding:20px;width:75%;}
             .choice-box{display:block;text-align:center;margin:8px auto;padding:10px 0;border:1px solid #666;cursor:pointer;-webkit-border-radius: 5px;-moz-border-radius: 5px;border-radius: 5px;}
             .bgbg{
