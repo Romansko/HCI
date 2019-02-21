@@ -14,7 +14,8 @@
             #submitbutton:hover{background:#7b8da6;}
             .simpleBtn{background:#C5F9EA; font-size: 14px; white-space: nowrap; margin: 5px;}
             .simpleBtn:active{background:#12FFBB; font-size: 12px;}
-			.simpleBtn:hover{background:#12FFBB;}
+            .simpleBtn:visited{background:#C5F9EA; font-size: 14px;}
+			      .simpleBtn:hover{background:#12FFBB;}
             #explanation{margin:0 auto;padding:20px;width:75%;}
             .choice-box{display:block;text-align:center;margin:8px auto;padding:10px 0;border:1px solid #666;cursor:pointer;-webkit-border-radius: 5px;-moz-border-radius: 5px;border-radius: 5px;}
             .bgbg{
