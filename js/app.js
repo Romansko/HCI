@@ -342,9 +342,9 @@ function generateBulk() {
         return;
     }
     var bulkQuestionsString = "";
-    bulkQuestionsString += "<center><H1>Graphica 100</H1><br/>";
-    bulkQuestionsString += "<br/>תשובה נכונה מסומנת באדום.";
-    bulkQuestionsString += "<br/>הסבר נוסף מסומן בירוק.";
+    bulkQuestionsString += "<center><H1>ממשק אדם מחשב</H1><br/>";
+    bulkQuestionsString += "<br/>תשובה נכונה מסומנת ב<font color = \"green\">ירוק</font>.";
+    bulkQuestionsString += "<br/>הסבר נוסף מסומן ב<font color = \"blue\">כחול</font>.";
     bulkQuestionsString += "<br/>סך שאלות:" + allQuestionsSave.length;
     bulkQuestionsString += "<br/><br><button onClick=\"window.print();return false;\">הדפסה</button>"
     bulkQuestionsString += "</center><br/><hr/>";
@@ -355,12 +355,16 @@ function generateBulk() {
             bulkQuestionsString += "<br/><img src=\"" + q.Image + "\" " + "style=\"width:300px;height:150px;\" /><br/>";
         }
         q.choices.forEach(function (c) {
-            if (c == q.correct) {
-                bulkQuestionsString += "<br/><font color = \"red\">" + c + "</font><br/>";
+            if (c && c != "$"){ // if string is not empty nor $.
+                if (c == q.correct) {
+                    bulkQuestionsString += "<br/><strong><font color = \"green\">" + c + "</strong></font><br/>";
+                }
+                else bulkQuestionsString += "<br/>" + c + "</br>";
             }
-            else bulkQuestionsString += "<br/>" + c + "</br>";
         });
-        bulkQuestionsString += "<br/><i><font color=\"green\">" + q.explanation + "</font></i>";
+        if (q.explanation && q.explanation != "$") {
+            bulkQuestionsString += "<br/><font color=\"blue\"><i>" + q.explanation + "</i></font>";
+        }
         bulkQuestionsString += "<hr/>";
     });
     bulkQuestionsString += "<hr/><center>RK Code Solution © 2018</center>";
