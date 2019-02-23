@@ -13,6 +13,7 @@
 	<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
     <link rel="icon" href="favicon.ico" type="image/x-icon">
+	<link rel="stylesheet" type="text/css" media="all" href="css/dotsMenu.css">
     <link rel="stylesheet" type="text/css" media="all" href="css/app.css">
     <title>HCI</title>
     <script src="js/jquery-3.3.1.min.js"></script>
@@ -22,8 +23,25 @@
 </head>
 
 <body>
-    <div class="bgbg">
-        <div id="frame" role="content"></div>
+	<div class="header">
+		<!-- three dot menu -->
+		<div class="dropdown">
+			<!-- three dots -->
+			<ul class="dropbtn icons btn-right showLeft" onclick="showDropdown()">
+				<li></li>
+				<li></li>
+				<li></li>
+			</ul>
+			<!-- menu -->
+			<div id="myDropdown" class="dropdown-content">
+				<a id="setQuizSize" onclick="setQuizSize()">set size</a>
+				<a id="genBulk" onclick="generateBulk()">all Q</a>
+			</div>
+		</div>
+	</div>
+	
+		<div class="bgbg">
+			<div id="frame" role="content"></div>
         <hr/>
         <div id="myProgress">
             <div id="loader"></div>
@@ -49,9 +67,6 @@
                 </td>
                 <td>
                     <button class="simpleBtn" id="reportMistake" onClick="reportMistake()"></button>
-                </td>
-                <td>
-                    <button class="simpleBtn" id="genBulk" onClick="generateBulk()"></button>
                 </td>
             </tr>
         </table>

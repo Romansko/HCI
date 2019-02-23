@@ -231,10 +231,11 @@ function initQuiz() {
     correctText = 'נכון';
     wrongText = 'טעות!'
     qInDB = 'סך שאלות במסד: ';
-    notEnoughQuestionMessage = 'כרגע אין מספיק שאלות במסד!'
+    notEnoughQuestionMessage = 'כרגע אין מספיק שאלות במסד בשביל למלא ' + qInQuiz +  ' שאלות בבוחן.';
     $("#newquiz").text('טען בוחן חדש');
     $("#reportMistake").text('דווח טעות');
     $("#genBulk").text('תצוגת כל השאלות');
+    $("#setQuizSize").text('הגדרת מספר שאלות בבוחן');
     $("#fetchingQ").text('טוען שאלות מהשרת..');
     document.body.style = "text-align:right;unicode-bidi:bidi-override; direction:rtl;"
     rootRef = fb.database().ref('hebrew');
@@ -244,7 +245,6 @@ function initQuiz() {
 function loadAllQuestions() {
     document.getElementById("myProgress").style.display = "block";
     document.getElementById("newquiz").style.display = "none";
-    document.getElementById("genBulk").style.display = "none";
     document.getElementById("reportMistake").style.display = "none";
     document.getElementById("frame").style.display = "none";
     allQuestions = [];
@@ -260,7 +260,7 @@ function loadAllQuestions() {
             allQuestionsSave.push(que);
         });
         $("#qNumText").text(qInDB + allQuestions.length);
-        if (allQuestionsSave.length < Q_IN_QUIZ)
+        if (allQuestionsSave.length < qInQuiz)
         {
             error(notEnoughQuestionMessage);
             return;
@@ -278,7 +278,6 @@ function error(errorMessage)
     document.getElementById("newquiz").style.display = "block";
     document.getElementById("reportMistake").style.display = "block";
     document.getElementById("frame").style.display = "block";
-    document.getElementById("genBulk").style.display = "block";
     $("#frame").empty();
     $(document.createElement('h1')).html('<font color=darkred>'+errorMessage+'</font>').appendTo('#frame');
 
@@ -294,7 +293,7 @@ function populateQuiz() {
     picked = undefined;
     quiz = [];
     shuffle(allQuestions);
-    for (var i = 0; i < Q_IN_QUIZ; ++i) {
+    for (var i = 0; i < qInQuiz; ++i) {
         var q = allQuestions.pop();
         if (q == undefined) {       // used all questions
             loadAllQuestions();
@@ -308,7 +307,6 @@ function populateQuiz() {
     document.getElementById("newquiz").style.display = "block";
     document.getElementById("reportMistake").style.display = "block";
     document.getElementById("frame").style.display = "block";
-    document.getElementById("genBulk").style.display = "block";
     init();
 }
 
@@ -374,7 +372,8 @@ function generateBulk() {
 }
 
 /************************************* MAIN **********************************************************/
-const Q_IN_QUIZ = 10;
+
+var qInQuiz = 10;       // default
 var nextQuestionText, quiztitle, correctText, qInDB;
 var checkAnswer, questionText, notEnoughQuestionMessage;
 var questionTextOf, doneQuizText1, doneQuizText2, doneQuizText3, doneQuizText4;
@@ -397,6 +396,47 @@ window.onload = function () {
     initQuiz();
 };
 
+function changeLanguage(language) {
+    var element = document.getElementById("url");
+    element.value = language;
+    element.innerHTML = language;
+}
 
+function showDropdown() {
+    document.getElementById("myDropdown").classList.toggle("show");
+}
 
+/* Menu */
+// Close the dropdown if the user clicks outside of it
+window.onclick = function(event) {
+    if (!event.target.matches('.dropbtn')) {
+        var dropdowns = document.getElementsByClassName("dropdown-content");
+        var i;
+        for (i = 0; i < dropdowns.length; i++) {
+            var openDropdown = dropdowns[i];
+            if (openDropdown.classList.contains('show')) {
+                openDropdown.classList.remove('show');
+            }
+        }
+    }
+}
 
+function setQuizSize() {
+    var descText = 'הגדר מספר שאלות לבוחן יחיד';
+    var errorText = 'קלט לא תקין';
+    var inputText = prompt(descText, qInQuiz);
+    if (inputText == null) {
+        return; // cancelled.
+    }
+    inputNumber = parseInt(inputText, 10); // radix 10
+    if (isNaN(inputNumber) || inputNumber === undefined) {
+        alert(errorText);
+        return;
+    }
+    if (inputNumber < 1 || inputNumber > allQuestionsSave.length) {
+        alert('המספר שהוזן לא הגיוני');
+        return;
+    }
+    qInQuiz = inputNumber;
+    populateQuiz();
+}
