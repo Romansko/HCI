@@ -22,7 +22,7 @@ function addChoices(choices) {
         $('#choice-block').empty();
         var j = 0;
         for (var i = 0; i < choices.length; i++) {
-            if (choices[i] != "$") {
+            if (typeof choices[i] !== "undefined" && choices[i] != "$" && choices[i] != "") {
                 $(document.createElement('li')).addClass('choice choice-box').attr('data-index', j).text(choices[i]).appendTo('#choice-block');
                 j++;
             }
@@ -238,7 +238,7 @@ function initQuiz() {
     $("#setQuizSize").text('הגדרת מספר שאלות בבוחן');
     $("#fetchingQ").text('טוען שאלות מהשרת..');
     document.body.style = "text-align:right;unicode-bidi:bidi-override; direction:rtl;"
-    rootRef = fb.database().ref('hebrew');
+    rootRef = fb.database().ref('rootName');
     loadAllQuestions();
 }
 
