@@ -334,6 +334,11 @@ function reportMistake() {
     window.open(mailString);
 }
 
+function getAndroidApp() {
+	var win = window.open("https://play.google.com/store/apps/details?id=com.rkcodesolution.hci");
+    win.focus();
+}
+
 function generateBulk() {
     if (allQuestionsSave == undefined || allQuestionsSave.length == 0) {
         alert(notEnoughQuestionMessage);
