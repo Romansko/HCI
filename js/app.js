@@ -316,7 +316,7 @@ function reportMistake() {
     if (userQuestion == undefined) {
         userQuestion = quiz[currentquestion];
     }
-    var subject = "Graphica100 - Question Error";
+    var subject = "HCI - Question Error";
     var body = "";
     body += "Question: " + userQuestion.question + "\n\n";
     body += "Correct Answer: " + userQuestion.correct + "\n\n";
